@@ -47,6 +47,7 @@ jobs:
       - name: Build Kernel
         run: |
           cd ksource
+          sed -i 's/CONFIG_INPUT_QPNP_HAPTICS/CONFIG_INPUT_QTI_HAPTICS/g' arch/arm64/configs/$KERNEL_DEFCONFIG
           make $KERNEL_CMDLINE $KERNEL_DEFCONFIG CC="ccache clang"
           make $KERNEL_CMDLINE CC="ccache clang" -j$(nproc --all)
           cp -rf out/arch/arm64/boot/ ../ArtifactsKernel
